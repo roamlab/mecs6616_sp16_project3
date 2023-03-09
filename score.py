@@ -1,11 +1,7 @@
 import numpy as np
-from arm_dynamics_teacher import ArmDynamicsTeacher
-from arm_dynamics_student import ArmDynamicsStudent
-from robot import Robot
 from arm_gui import ArmGUI, Renderer
 import time
 import math
-import torch
 np.set_printoptions(suppress=True)
 
 
@@ -31,29 +27,9 @@ def set_torque0(arm_teacher, arm_student, torque):
     arm_student.set_action(action)
 
 
-def score_random_torque(model_path, gui):
+def score_random_torque(arm_teacher, arm_student, gui):
     time_limit = 5
     num_tests = 50
-    # Teacher arm
-    dynamics_teacher = ArmDynamicsTeacher(
-        num_links=3,
-        link_mass=0.1,
-        link_length=1,
-        joint_viscous_friction=0.1,
-        dt=0.01
-    )
-    arm_teacher = Robot(dynamics_teacher)
-
-    # Student arm
-    dynamics_student = ArmDynamicsStudent(
-        num_links=3,
-        link_mass=0.1,
-        link_length=1,
-        joint_viscous_friction=0.1,
-        dt=0.01
-    )
-    dynamics_student.init_model(model_path, 3, 0.01, device=torch.device('cpu'))
-    arm_student = Robot(dynamics_student)
 
     scores = []
     torques = np.random.uniform(-1.5, 1.5, num_tests)
@@ -93,29 +69,9 @@ def score_random_torque(model_path, gui):
     print("----------------------------------------\n")
 
 
-def score_two_torques(model_path, gui):
+def score_two_torques(arm_teacher, arm_student, gui):
     time_limit = 5
     num_tests = 50
-    # Teacher arm
-    dynamics_teacher = ArmDynamicsTeacher(
-        num_links=3,
-        link_mass=0.1,
-        link_length=1,
-        joint_viscous_friction=0.1,
-        dt=0.01
-    )
-    arm_teacher = Robot(dynamics_teacher)
-
-    # Student arm
-    dynamics_student = ArmDynamicsStudent(
-        num_links=3,
-        link_mass=0.1,
-        link_length=1,
-        joint_viscous_friction=0.1,
-        dt=0.01
-    )
-    dynamics_student.init_model(model_path, 3, 0.01, device=torch.device('cpu'))
-    arm_student = Robot(dynamics_student)
 
     scores = []
     torques1 = np.random.uniform(-1, 1, num_tests)
@@ -160,29 +116,9 @@ def score_two_torques(model_path, gui):
     print("----------------------------------------\n")
 
 
-def score_linear_torques(model_path, gui):
+def score_linear_torques(arm_teacher, arm_student, gui):
     time_limit = 5
     num_tests = 50
-    # Teacher arm
-    dynamics_teacher = ArmDynamicsTeacher(
-        num_links=3,
-        link_mass=0.1,
-        link_length=1,
-        joint_viscous_friction=0.1,
-        dt=0.01
-    )
-    arm_teacher = Robot(dynamics_teacher)
-
-    # Student arm
-    dynamics_student = ArmDynamicsStudent(
-        num_links=3,
-        link_mass=0.1,
-        link_length=1,
-        joint_viscous_friction=0.1,
-        dt=0.01
-    )
-    dynamics_student.init_model(model_path, 3, 0.01, device=torch.device('cpu'))
-    arm_student = Robot(dynamics_student)
 
     scores = []
     torques = np.random.uniform(0.5, 1.5, num_tests)
