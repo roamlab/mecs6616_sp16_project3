@@ -1,6 +1,6 @@
 import numpy as np
 # from arm_gui import ArmGUI, Renderer
-from student_code.project3.render import Renderer
+from render import Renderer
 import time
 import math
 
