@@ -159,7 +159,7 @@ def score_two_torques(arm_teacher, arm_student, gui):
         print(f'average mse: {mse}')
         if mse < 0.05:
           score = 0.5
-        if mse < 0.01:
+        if mse < 0.015:
           score = 1
         if mse >= 0.05:
           score = 0
